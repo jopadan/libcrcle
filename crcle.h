@@ -1,5 +1,5 @@
-#ifndef _CRC_H
-#define _CRC_H
+#ifndef _CRCLE_H
+#define _CRCLE_H
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
