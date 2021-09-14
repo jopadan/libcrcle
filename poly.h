@@ -21,6 +21,16 @@ typedef uint64_t poly64_t;
 #define POLY32_CRC32C_CASTAGNOLIA_RECIPROCAL          0x05EC76F1
 #define POLY32_CRC32C_CASTAGNOLIA_REVERSED_RECIPROCAL 0x8F6E37A0 
 
+
+
+#define POLY32_CRC32K_KOOPMAN_1_3_28_NORMAL           0x741B8CD7
+#define POLY32_CRC32K_KOOPMAN_1_3_28_REVERSED         0xEB31D82E
+#define POLY32_CRC32K_KOOPMAN_1_3_28_RECIPROCAL       0xD663B05D
+#define POLY32_CRC32K_KOOPMAN_1_3_28_REVERED_RECIPROCAL 0xBA0DC66B   
+#define POLY32_CRC32K_KOOPMAN_1_1_30_NORMAL           0x32583499
+#define POLY32_CRC32K_KOOPMAN_1_1_30_REVERSED         0x992C1A4C
+#define POLY32_CRC32K_KOOPMAN_1_1_30_RECIPROCAL       0x32583499
+#define POLY32_CRC32K_KOOPMAN_1_1_30_REVERED_RECIPROCAL 0x992C1A4C
 #define POLY32_CRC32Q_NORMAL                          0x814141AB
 #define POLY32_CRC32Q_REVERSED                        0xD5828281 
 #define POLY32_CRC32Q_RECIPROCAL                      0xAB050503
@@ -86,6 +96,7 @@ poly32_t poly32_rev_rcp(const poly32_t x);
 #define poly32_msb_to_rev_rcp(x) poly32_ror(x, 1)
 #define poly32_msb_to_lsb(x) poly32_reflect(x)
 #define poly32_lsb_to_msb(x) poly32_reflect(x)
+#define poly32_msb_to_rcp(x) poly32_reflect(poly32_ror(x, 1));
 
 /* poly64_t polynomial converter functions */
 poly64_t poly64_reflect( const poly64_t x );

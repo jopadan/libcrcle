@@ -1,61 +1,70 @@
 #include "poly.h"
 
+#define CRC32_TABLE_SIZE (UINT8_MAX + 1)
+
 typedef enum crc_type_e
 {
-	CRC32-IEEE,
-	CRC32-CCITT,
-	CRC32-ZIP,
+	CRC32_IEEE,
+	CRC32_CCITT,
+	CRC32_ZIP,
 	CRC32A,
 	CRC32B,
-	CRC32C-CASTAGNOLIA,
-	CRC32K-KOOPMAN_1_3_28,
-	CRC32K-KOOPMAN_1_1_30,
+	CRC32C_CASTAGNOLIA,
+	CRC32K_KOOPMAN_1_3_28,
+	CRC32K_KOOPMAN_1_1_30,
 	CRC32Q,
 } crc_type_t;
 
-typedef struct crc32_s
+typedef struct poly_s
 {
-	crc_type_t type;
-
-	struct poly {
-		poly32_t std;
-		poly32_t rev;
-		poly32_t rcp;
-		poly32_t rev_rcp;
-		poly32_t ini;
-	}
-
-	struct bitcnt {
+	poly32_t std;
+	poly32_t rev;
+	poly32_t rcp;
+	poly32_t rev_rcp;
+	poly32_t ini;
+} poly_t;
+typedef struct bitcnt_s
+{
 		int8_t std;
 		int8_t rev;
 		int8_t rcp;
 		int8_t rev_rcp;
 		int8_t ini;
-	}
+} bitcnt_t;
 
-	struct parity {
-		bool std;
-		bool rev;
-		bool rcp;
-		bool rev_rcp;
-		bool ini;
-	}
+typedef struct primitive_s
+{
+	bool std;
+	bool rev;
+	bool rcp;
+	bool rev_rcp;
+	bool ini;
+} primitive_t;
 
-	struct primitive {
-		bool std;
-		bool rev;
-		bool rcp
-		bool rev_rcp;
-		bool ini;
-	}
+typedef struct parity_s
+{
+	bool std;
+	bool rev;
+	bool rcp;
+	bool rev_rcp;
+	bool ini;
+} parity_t;
 
-	struct table {
-		poly32_t std[8][UINT8_MAX + 1];
-		poly32_t rev[8][UINT8_MAX + 1];
-		poly32_t rcp[8][UINT8_MAX + 1];
-		poly32_t rev_rcp[8][UINT8_MAX + 1];
-		poly32_t ini[8][UINT8_MAX + 1];
-	}
+typedef struct table_s {
+	poly32_t std[CRC32_TABLE_SIZE];
+	poly32_t rev[CRC32_TABLE_SIZE];
+	poly32_t rcp[CRC32_TABLE_SIZE];
+	poly32_t rev_rcp[CRC32_TABLE_SIZE];
+	poly32_t ini[CRC32_TABLE_SIZE];
+} table_t;
+
+typedef struct crc32_s
+{
+	crc_type_t type;
+	poly_t poly;
+	bitcnt_t bitcnt;
+	parity_t parity;
+	table_t table;
 
 	bool rcp_int;
 	bool rcp_out;
