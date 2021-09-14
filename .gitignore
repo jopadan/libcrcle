@@ -11,3 +11,11 @@ CTestTestfile.cmake
 _deps
 chkcrcle
 *.a
+.a
+a.out
+*.exe
+.exe
+libcrcle.a
+*.pc
+libcrcle.pc
+test
